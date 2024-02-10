@@ -1,37 +1,38 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-entity sensa_boton is
-Port ( boton : in STD_LOGIC;
-clk : in STD_LOGIC;
-reloj : out STD_LOGIC;
-epresente: buffer STD_LOGIC);
-end sensa_boton;
-architecture Behavioral of sensa_boton is
-signal esiguiente: STD_LOGIC;
-begin
-process (esiguiente,boton)begin
-if rising_edge (clk) then
-case esiguiente is
-when '0' =>
-reloj <= '0';
-if boton ='0' then
-esiguiente <= '0';
-else
-esiguiente <= '1';
-end if;
-when '1' =>
-if boton ='1' then
-esiguiente <= '1';
-reloj <= '0';
-else
-esiguiente <= '0';
-reloj <= '1';
-end if;
-when others => null;
-end case;
-end if;
-epresente <= esiguiente;
-end process;
-end Behavioral;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+ENTITY sensa_boton IS
+    PORT (
+        boton : IN STD_LOGIC;
+        clk : IN STD_LOGIC;
+        reloj : OUT STD_LOGIC;
+        epresente : BUFFER STD_LOGIC);
+END sensa_boton;
+ARCHITECTURE Behavioral OF sensa_boton IS
+    SIGNAL esiguiente : STD_LOGIC;
+BEGIN
+    PROCESS (esiguiente, boton)BEGIN
+        IF rising_edge (clk) THEN
+            CASE esiguiente IS
+                WHEN '0' =>
+                    reloj <= '0';
+                    IF boton = '0' THEN
+                        esiguiente <= '0';
+                    ELSE
+                        esiguiente <= '1';
+                    END IF;
+                WHEN '1' =>
+                    IF boton = '1' THEN
+                        esiguiente <= '1';
+                        reloj <= '0';
+                    ELSE
+                        esiguiente <= '0';
+                        reloj <= '1';
+                    END IF;
+                WHEN OTHERS => NULL;
+            END CASE;
+        END IF;
+        epresente <= esiguiente;
+    END PROCESS;
+END Behavioral;
